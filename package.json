@@ -1,0 +1,19 @@
+{
+  "name": "calculadora-testes",
+  "version": "1.0.0",
+  "description": "Calculadora com testes completos",
+  "main": "src/calculadora.js",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest tests/unit --coverage --config=jest.unit.config.js",
+    "test:integration": "jest tests/integration --config=jest.unit.config.js",
+    "test:e2e": "jest tests/e2e --config=jest.e2e.config.js",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "serve": "npx http-server src -p 3000 -c-1"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "puppeteer": "^21.0.0",
+    "http-server": "^14.0.0"
+  }
+}

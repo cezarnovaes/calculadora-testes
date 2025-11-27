@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Testes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora</h1>
+        
+        <div class="calculadora">
+            <div class="display">
+                <input type="text" id="display" readonly>
+                <div id="resultado"></div>
+            </div>
+            
+            <div class="botoes">
+                <button onclick="limpar()" class="btn btn-clear">C</button>
+                <button onclick="adicionarOperacao('√')" class="btn btn-operation">√</button>
+                <button onclick="adicionarOperacao('^')" class="btn btn-operation">^</button>
+                <button onclick="adicionarOperacao('/')" class="btn btn-operation">/</button>
+                
+                <button onclick="adicionarNumero('7')" class="btn">7</button>
+                <button onclick="adicionarNumero('8')" class="btn">8</button>
+                <button onclick="adicionarNumero('9')" class="btn">9</button>
+                <button onclick="adicionarOperacao('*')" class="btn btn-operation">×</button>
+                
+                <button onclick="adicionarNumero('4')" class="btn">4</button>
+                <button onclick="adicionarNumero('5')" class="btn">5</button>
+                <button onclick="adicionarNumero('6')" class="btn">6</button>
+                <button onclick="adicionarOperacao('-')" class="btn btn-operation">-</button>
+                
+                <button onclick="adicionarNumero('1')" class="btn">1</button>
+                <button onclick="adicionarNumero('2')" class="btn">2</button>
+                <button onclick="adicionarNumero('3')" class="btn">3</button>
+                <button onclick="adicionarOperacao('+')" class="btn btn-operation">+</button>
+                
+                <button onclick="adicionarNumero('0')" class="btn btn-zero">0</button>
+                <button onclick="adicionarDecimal()" class="btn">.</button>
+                <button onclick="calcular()" class="btn btn-equals">=</button>
+            </div>
+        </div>
+        
+        <div class="historico">
+            <h3>Histórico</h3>
+            <div id="historico-lista"></div>
+            <button onclick="limparHistorico()" class="btn btn-clear">Limpar Histórico</button>
+        </div>
+    </div>
+
+    <script src="calculadora.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
