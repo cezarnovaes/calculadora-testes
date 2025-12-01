@@ -24,7 +24,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Instalar dependências
       run: npm ci
     
