@@ -143,7 +143,6 @@ const Calculadora = (function() {
     };
 })();
 
-// Export para Node.js e navegador
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Calculadora;
 } else {
