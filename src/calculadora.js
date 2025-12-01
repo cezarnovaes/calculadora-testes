@@ -7,7 +7,7 @@ const Calculadora = (function() {
 
     function adicionarHistorico(operacao, resultado) {
         historico.unshift({
-            operacao,
+            operacao, 
             resultado,
             timestamp: new Date().toISOString()
         });
