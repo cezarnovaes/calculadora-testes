@@ -102,16 +102,13 @@ const Calculadora = (function() {
             throw new Error('Expressão deve ser uma string');
         }
 
-        // Remove espaços e valida caracteres
         const exprLimpa = expressao.replace(/\s+/g, '');
         
-        // Permite números, operadores matemáticos, parênteses, ponto decimal, raiz e notação científica
         if (!/^[-+*/×÷√^.0-9eE\s()]+$/.test(exprLimpa)) {
             throw new Error('Expressão contém caracteres inválidos');
         }
 
         try {
-            // Substitui símbolos matemáticos para JavaScript
             const exprPadronizada = exprLimpa
                 .replace(/×/g, '*')
                 .replace(/÷/g, '/')
@@ -119,7 +116,6 @@ const Calculadora = (function() {
                 .replace(/√(\d+(\.\d+)?)/g, 'Math.sqrt($1)')
                 .replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
 
-            // Avalia a expressão de forma segura
             const resultado = Function('"use strict"; return (' + exprPadronizada + ')')();
             
             if (typeof resultado !== 'number' || isNaN(resultado) || !isFinite(resultado)) {
