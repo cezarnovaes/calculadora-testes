@@ -1,4 +1,3 @@
-// Aplicação frontend da calculadora
 let displayValue = '';
 let ultimaOperacaoRaiz = false;
 
@@ -18,7 +17,6 @@ function adicionarNumero(numero) {
 
 function adicionarOperacao(operacao) {
     if (operacao === '√') {
-        // Para raiz quadrada, calculamos imediatamente se há um número no display
         if (displayValue !== '' && !isNaN(displayValue)) {
             try {
                 const numero = parseFloat(displayValue);
@@ -30,7 +28,6 @@ function adicionarOperacao(operacao) {
                 document.getElementById('resultado').textContent = `Erro: ${error.message}`;
             }
         } else {
-            // Se não há número, permite digitar após o √
             displayValue = '√';
             ultimaOperacaoRaiz = false;
         }
@@ -85,7 +82,6 @@ function calcular() {
     try {
         if (displayValue === '') return;
         
-        // Se termina com operação, remove
         if (isUltimoCaracterOperacao()) {
             displayValue = displayValue.slice(0, -1);
         }
@@ -116,7 +112,6 @@ function atualizarHistorico() {
     ).join('');
 }
 
-// Event listeners para teclado
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
         const key = event.key;
@@ -137,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ultimaOperacaoRaiz = false;
             atualizarDisplay();
         } else if (key === 'r' || key === 'R') {
-            // Tecla R para raiz quadrada
             event.preventDefault();
             adicionarOperacao('√');
         }

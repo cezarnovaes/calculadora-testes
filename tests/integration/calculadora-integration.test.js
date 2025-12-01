@@ -7,33 +7,28 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
 
     describe('Cobertura de Branches Específicos', () => {
         test('deve cobrir branch de validação com números muito grandes', () => {
-            // Testa números no limite do JavaScript
             const numeroGrande = 1.7976931348623157e+308;
             expect(() => Calculadora.somar(numeroGrande, 1)).not.toThrow();
         });
 
         test('deve cobrir branch de expressões com raiz quadrada complexa', () => {
-            // Testa expressão com raiz quadrada de parênteses
             const resultado = Calculadora.calcularExpressao('√(9) + 1');
             expect(resultado).toBe(4);
         });
 
         test('deve cobrir branch de erro em expressão com resultado NaN', () => {
-            // Força um resultado NaN
             expect(() => {
                 Calculadora.calcularExpressao('0/0');
             }).toThrow('Resultado inválido');
         });
 
         test('deve cobrir branch de erro em expressão com caracteres inválidos', () => {
-            // Testa caracteres não permitidos
             expect(() => {
                 Calculadora.calcularExpressao('2 + abc');
             }).toThrow('Expressão contém caracteres inválidos');
         });
 
         test('deve cobrir branch de erro em expressão com tipo inválido', () => {
-            // Testa com tipo não string
             expect(() => {
                 Calculadora.calcularExpressao(123);
             }).toThrow('Expressão deve ser uma string');
@@ -54,7 +49,7 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
         test('deve cobrir branch de divisão por zero em expressão', () => {
             expect(() => {
                 Calculadora.calcularExpressao('1 / 0');
-            }).toThrow('Resultado inválido'); // Agora deve lançar erro devido à verificação de isFinite()
+            }).toThrow('Resultado inválido');
         });
     });
 
@@ -73,23 +68,22 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
         });
 
         test('deve validar histórico com operações mistas', () => {
-            // Mix de operações válidas e inválidas (que lançam erro)
             Calculadora.somar(1, 2);
             expect(() => Calculadora.dividir(5, 0)).toThrow();
             Calculadora.multiplicar(3, 4);
 
             const historico = Calculadora.obterHistorico();
-            expect(historico).toHaveLength(2); // Apenas as operações bem-sucedidas
-            expect(historico[0].operacao).toBe('3 × 4');
+            expect(historico).toHaveLength(2);
+            expect(historico[0].operacao).toBe('3 x 4');
             expect(historico[1].operacao).toBe('1 + 2');
         });
 
         test('deve testar múltiplas operações de porcentagem', () => {
             const resultados = [];
-            resultados.push(Calculadora.porcentagem(100, 10)); // 10
-            resultados.push(Calculadora.porcentagem(200, 25)); // 50
-            resultados.push(Calculadora.porcentagem(50, 100)); // 50
-            resultados.push(Calculadora.porcentagem(0, 50));   // 0
+            resultados.push(Calculadora.porcentagem(100, 10));
+            resultados.push(Calculadora.porcentagem(200, 25)); 
+            resultados.push(Calculadora.porcentagem(50, 100)); 
+            resultados.push(Calculadora.porcentagem(0, 50));
 
             expect(resultados).toEqual([10, 50, 50, 0]);
         });
@@ -112,7 +106,6 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
         });
 
         test('deve lidar com expressões com múltiplos operadores consecutivos', () => {
-            // Testa a resiliência com operadores consecutivos
             expect(() => {
                 Calculadora.calcularExpressao('2++3');
             }).toThrow('Expressão matemática inválida');
@@ -155,17 +148,12 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
             expect(() => Calculadora.porcentagem(100, 'invalid')).toThrow('Valor deve ser um número válido');
         });
 
-        test('deve cobrir linha 110 - validação de número em calcularExpressao', () => {
-            // Já coberto pelos testes acima
-        });
-
         test('deve cobrir linha 126 - regex de validação de caracteres', () => {
             expect(() => Calculadora.calcularExpressao('2 + @')).toThrow('Expressão contém caracteres inválidos');
             expect(() => Calculadora.calcularExpressao('2 + #abc')).toThrow('Expressão contém caracteres inválidos');
         });
 
         test('deve cobrir linha 132 - substituição de símbolos na expressão', () => {
-            // Testa todos os símbolos de substituição
             expect(Calculadora.calcularExpressao('2 × 3')).toBe(6);
             expect(Calculadora.calcularExpressao('10 ÷ 2')).toBe(5);
             expect(Calculadora.calcularExpressao('2 ^ 3')).toBe(8);
@@ -173,7 +161,6 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
         });
 
         test('deve cobrir linha 154 - erro específico na avaliação da expressão', () => {
-            // Força erro na função de avaliação
             expect(() => Calculadora.calcularExpressao('2 + ')).toThrow('Expressão matemática inválida');
             expect(() => Calculadora.calcularExpressao('(2 + 3')).toThrow('Expressão matemática inválida');
             expect(() => Calculadora.calcularExpressao('2 + * 3')).toThrow('Expressão matemática inválida');
@@ -184,13 +171,10 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
         test('deve manter estado consistente após erro', () => {
             const historicoInicial = Calculadora.obterHistorico().length;
             
-            // Operação válida
             Calculadora.somar(1, 2);
             
-            // Operação que falha
             expect(() => Calculadora.dividir(10, 0)).toThrow();
             
-            // Outra operação válida
             Calculadora.multiplicar(3, 4);
             
             const historicoFinal = Calculadora.obterHistorico();
@@ -202,7 +186,6 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
         test('deve lidar com sequência mista de sucessos e falhas', () => {
             const resultados = [];
             
-            // Mistura operações válidas e inválidas
             resultados.push(Calculadora.somar(1, 2));
             expect(() => Calculadora.raizQuadrada(-1)).toThrow();
             resultados.push(Calculadora.multiplicar(3, 4));
