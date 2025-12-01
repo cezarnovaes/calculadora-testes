@@ -74,7 +74,7 @@ describe('Calculadora - Testes de Integração - Cobertura Completa', () => {
 
             const historico = Calculadora.obterHistorico();
             expect(historico).toHaveLength(2);
-            expect(historico[0].operacao).toBe('3 x 4');
+            expect(historico[0].operacao).toBe('3 × 4');
             expect(historico[1].operacao).toBe('1 + 2');
         });
 
